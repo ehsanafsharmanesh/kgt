@@ -7,6 +7,14 @@
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          // مقداردهی اولیه با Public Key شما
+          emailjs.init("VZYbSfsVjY-B4rsyE");
+       })();
+    </script>
+
     <style>
         /* --- تنظیمات پایه --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -76,6 +84,7 @@
             box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3); transition: all 0.3s;
         }
         .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27, 94, 32, 0.4); }
+        .nav-btn:disabled { background: #ccc; transform: none; box-shadow: none; cursor: not-allowed; }
 
         /* --- ساختار کلی صفحات --- */
         .main-section { display: none; padding-top: 100px; min-height: 100vh; animation: fadeIn 0.6s ease; }
@@ -822,7 +831,7 @@
             }
         }
 
-        // --- منطق امنیت OTP ---
+        // --- منطق امنیت OTP و EmailJS ---
         let generatedOTP = null;
         const ALLOWED_EMAIL = 'afsharmanesh.ehsan@gmail.com';
 
@@ -836,11 +845,38 @@
             // تولید کد 5 رقمی تصادفی
             generatedOTP = Math.floor(10000 + Math.random() * 90000);
             
-            // شبیه‌سازی ارسال ایمیل (در واقعیت باید با سرور انجام شود)
-            alert(`کد تایید به ایمیل ${email} ارسال شد.\nکد شما برای تست: ${generatedOTP}`);
-            
-            document.getElementById('emailStep').style.display = 'none';
-            document.getElementById('otpStep').style.display = 'block';
+            // تنظیمات دکمه برای جلوگیری از کلیک مجدد
+            const sendBtn = document.querySelector('#emailStep .nav-btn');
+            const originalText = sendBtn.innerText;
+            sendBtn.innerText = 'در حال ارسال...';
+            sendBtn.disabled = true;
+
+            // پارامترهای قالب ایمیل
+            // فرض بر این است که قالب شما متغیرهای 'otp_code' و 'to_email' یا موارد مشابه را می‌پذیرد.
+            // این آبجکت اکثر نام‌گذاری‌های استاندارد را پوشش می‌دهد.
+            const templateParams = {
+                to_email: email,
+                otp_code: generatedOTP,
+                message: generatedOTP, // جهت اطمینان
+                to_name: "مدیر محترم"
+            };
+
+            // ارسال ایمیل با استفاده از EmailJS
+            emailjs.send('service_0cbwqya', 'template_enjznsm', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert(`کد تایید به ایمیل ${email} ارسال شد.`);
+                    
+                    document.getElementById('emailStep').style.display = 'none';
+                    document.getElementById('otpStep').style.display = 'block';
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('خطا در ارسال ایمیل. لطفا اتصال اینترنت را بررسی کنید یا تنظیمات EmailJS را چک کنید.');
+                })
+                .finally(() => {
+                    sendBtn.innerText = originalText;
+                    sendBtn.disabled = false;
+                });
         }
 
         function verifyOTP() {
