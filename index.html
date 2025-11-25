@@ -10,10 +10,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
-          // مقداردهی اولیه با Public Key شما
           emailjs.init("VZYbSfsVjY-B4rsyE");
        })();
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
 
     <style>
         /* --- تنظیمات پایه --- */
@@ -32,20 +35,15 @@
             --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
         }
 
-        @font-face {
-            font-family: 'Vazir';
-            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
-        }
-
         body {
-            font-family: 'Vazir', sans-serif;
+            font-family: 'Vazirmatn', sans-serif; /* فونت جدید و استاندارد */
             background: var(--background);
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.6;
         }
 
-        /* --- نوار ناوبری (گرافیک فایل ارسالی) --- */
+        /* --- نوار ناوبری --- */
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -58,21 +56,20 @@
         }
         .nav-logo { font-weight: 800; font-size: 1.4rem; color: var(--primary-dark); display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
         
-        /* استایل اختصاصی تب‌ها (درخواست شده) */
         .nav-menu {
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            background: #f1f8e9; /* پس زمینه سبز خیلی روشن */
+            background: #f1f8e9;
             padding: 0.5rem 1rem;
-            border-radius: 50px; /* گرد کردن کادر */
+            border-radius: 50px;
             border: 1px solid #dcedc8;
         }
 
         .nav-link { 
             color: var(--text-dark); text-decoration: none; font-weight: 600; 
             font-size: 0.95rem; padding: 0.5rem 1rem; border-radius: 25px; 
-            transition: all 0.3s; position: relative; cursor: pointer;
+            transition: all 0.3s; position: relative; cursor: pointer; white-space: nowrap;
         }
         .nav-link:hover { color: var(--primary-dark); background: rgba(76, 175, 80, 0.1); transform: translateY(-1px); }
         .nav-link.active-tab { background: var(--primary-color); color: white; box-shadow: 0 4px 10px rgba(46,125,50,0.3); }
@@ -81,7 +78,7 @@
             background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)); 
             color: white; padding: 0.6rem 1.8rem; border-radius: 25px; 
             border: none; cursor: pointer; font-family: inherit; font-weight: 700;
-            box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3); transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(27, 94, 32, 0.3); transition: all 0.3s; white-space: nowrap;
         }
         .nav-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27, 94, 32, 0.4); }
         .nav-btn:disabled { background: #ccc; transform: none; box-shadow: none; cursor: not-allowed; }
@@ -125,14 +122,40 @@
             70% { transform: translateX(-50%) scale(1.1) rotate(0deg); opacity: 1; }
             100% { transform: translateX(-50%) scale(1) rotate(0deg); opacity: 1; }
         }
+        
+        /* نشانگر ضریب درخت (برای بیش از 500 کیلو) */
+        .tree-multiplier-badge {
+            position: absolute; top: 10px; right: 10px;
+            background: var(--secondary-color); color: var(--text-dark);
+            font-weight: 900; padding: 5px 15px; border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100; font-size: 1.2rem;
+            animation: bounceIn 0.8s;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); }
+        }
 
-        /* --- بخش جوایز (کد کامل از فایل ارسالی) --- */
+        /* --- بخش جوایز --- */
         .awards-section {
             padding: 0; position: relative; margin-top: -60px; margin-bottom: 4rem; z-index: 10;
         }
         .section-header-awards {
-            text-align: center; margin-bottom: 2rem; color: var(--text-dark); /* اصلاح رنگ برای خوانایی */
+            text-align: center; margin-bottom: 2rem;
+            /* اصلاح پس‌زمینه تایتل جوایز برای خوانایی */
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            position: relative; left: 50%; transform: translateX(-50%);
         }
+        .section-header-awards h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-dark); }
+        .section-header-awards p { opacity: 0.9; color: var(--primary-dark); font-weight: 500; }
+
         .awards-slider {
             max-width: 1000px; margin: 0 auto; position: relative; border-radius: 24px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); background: var(--white);
@@ -192,7 +215,6 @@
         }
         .nav-dot.active { background: var(--secondary-color); width: 30px; border-radius: 10px; }
 
-
         /* --- فوتر --- */
         .footer { background: #1b1b1b; color: #fff; padding: 3rem 0; margin-top: 4rem; text-align: center; border-top: 5px solid var(--primary-color); }
         .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
@@ -221,7 +243,7 @@
         .modern-table tr:hover { background: #f9fafb; }
         .rank-badge { background: var(--secondary-color); color: var(--primary-dark); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; }
         
-        .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; }
+        .tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .tab-btn { padding: 0.8rem 2rem; border-radius: 50px; border: none; background: white; color: var(--text-light); cursor: pointer; font-weight: 600; font-family: inherit; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: all 0.3s; }
         .tab-btn.active { background: var(--primary-color); color: white; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,125,50,0.3); }
         .tab-content { display: none; animation: fadeIn 0.4s; }
@@ -229,7 +251,7 @@
 
         /* --- پروفایل‌ها --- */
         .school-profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        @media (max-width: 768px) { .school-profile-grid { grid-template-columns: 1fr; } }
+        
         .progress-circle-container { position: relative; width: 200px; height: 200px; margin: 0 auto; }
         .progress-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
         .progress-circle-bg { fill: none; stroke: #e0e0e0; stroke-width: 10; }
@@ -244,9 +266,40 @@
         .access-card { background: white; max-width: 400px; margin: 2rem auto; padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-soft); text-align: center; }
         .access-input { width: 100%; padding: 1rem; border: 2px solid #eee; border-radius: 10px; margin: 1rem 0; font-family: inherit; outline: none; transition: border 0.3s; text-align: center; direction: ltr; }
         .access-input:focus { border-color: var(--primary-color); }
-        .upload-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; }
+        /* پنل مدیریت: یک ستون برای بارگذاری کلی */
+        .upload-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
         .upload-box { border: 2px dashed #cbd5e1; padding: 1.5rem; border-radius: 12px; cursor: pointer; transition: all 0.3s; background: #f8fafc; }
         .upload-box:hover { border-color: var(--primary-color); background: #f0fdf4; }
+
+        /* --- اصلاحات ریسپانسیو (موبایل فرندلی) --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 0.5rem 0; }
+            /* اسکرول افقی برای منو در موبایل */
+            .nav-menu { 
+                overflow-x: auto; 
+                white-space: nowrap; 
+                padding: 0.5rem; 
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* فایرفاکس */
+            }
+            .nav-menu::-webkit-scrollbar { display: none; } /* کروم و سافاری */
+            
+            .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+            .hero-content > div:first-child { order: 2; }
+            .tree-container-hero { order: 1; transform: scale(0.9); margin: 0 auto; }
+            .stat-cards-hero { grid-template-columns: 1fr 1fr; }
+            .hero-title { font-size: 2rem; }
+            
+            .school-profile-grid { grid-template-columns: 1fr; }
+            .stats-cards-row { grid-template-columns: 1fr; }
+            
+            .section-header-awards h2 { font-size: 1.5rem; }
+            .awards-slider { height: 500px; }
+            .award-content { padding: 1.5rem; }
+            .award-title { font-size: 1.5rem; }
+            
+            .modern-table th, .modern-table td { padding: 0.8rem 0.5rem; font-size: 0.9rem; }
+        }
 
     </style>
 </head>
@@ -256,7 +309,7 @@
         <div class="nav-container">
             <div class="nav-logo" onclick="showSection('home')">
                 <span style="font-size: 1.8rem;">🌳</span>
-                <span>درخت سبز کرمان</span>
+                <span style="display: inline-block;">درخت سبز کرمان</span>
             </div>
             <div class="nav-menu">
                 <a class="nav-link active-tab" onclick="showSection('home')">خانه</a>
@@ -282,19 +335,19 @@
                         
                         <div class="stat-cards-hero">
                             <div class="hero-stat-card">
-                                <span class="hero-stat-val">۱,۲۵۰</span>
+                                <span class="hero-stat-val" id="totalActiveSchools">0</span>
                                 <span class="hero-stat-lbl">مدرسه فعال</span>
                             </div>
                             <div class="hero-stat-card">
-                                <span class="hero-stat-val">۳۱۵</span>
+                                <span class="hero-stat-val" id="totalTreesSaved">0</span>
                                 <span class="hero-stat-lbl">درخت نجات‌یافته</span>
                             </div>
                             <div class="hero-stat-card">
-                                <span class="hero-stat-val" id="topOfficeNameHero">ناحیه ۲</span>
+                                <span class="hero-stat-val" id="topOfficeNameHero">-</span>
                                 <span class="hero-stat-lbl">اداره برتر</span>
                             </div>
                             <div class="hero-stat-card">
-                                <span class="hero-stat-val" id="topSchoolNameHero">امام رضا</span>
+                                <span class="hero-stat-val" id="topSchoolNameHero">-</span>
                                 <span class="hero-stat-lbl">مدرسه برتر</span>
                             </div>
                         </div>
@@ -319,8 +372,8 @@
         <div class="awards-section" id="awards-anchor">
             <div class="container">
                 <div class="section-header-awards">
-                    <h2 style="font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-dark);">جشنواره جوایز بزرگ سبز</h2>
-                    <p style="opacity: 0.9; color: var(--primary-dark);">تقدیر از تلاشگران حفظ محیط زیست با جوایز نفیس</p>
+                    <h2>جشنواره جوایز بزرگ سبز</h2>
+                    <p>تقدیر از تلاشگران حفظ محیط زیست با جوایز نفیس</p>
                 </div>
                 
                 <div class="awards-slider" id="awardsSlider">
@@ -407,7 +460,7 @@
                             <tr>
                                 <th>رتبه</th>
                                 <th>نام مدرسه</th>
-                                <th>منطقه</th>
+                                <th>منطقه (اداره)</th>
                                 <th>جمع‌آوری (kg)</th>
                                 <th>وضعیت</th>
                             </tr>
@@ -425,7 +478,7 @@
                             <tr>
                                 <th>رتبه</th>
                                 <th>نام اداره</th>
-                                <th>تعداد مدارس</th>
+                                <th>تعداد مدارس فعال</th>
                                 <th>کل جمع‌آوری (kg)</th>
                                 <th>عملکرد</th>
                             </tr>
@@ -443,15 +496,17 @@
             <div class="page-header">
                 <div style="padding: 0 2rem; position: relative; z-index: 2;">
                     <span style="background: var(--secondary-color); color: var(--primary-dark); padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">پروفایل مدرسه برتر</span>
-                    <h1 id="schoolProfileName" style="margin-top: 10px;">دبیرستان نمونه دولتی امام رضا</h1>
-                    <p id="schoolProfileRegion">ناحیه ۱ کرمان | کد: KER-01-02</p>
+                    <h1 id="schoolProfileName" style="margin-top: 10px;">-</h1>
+                    <p id="schoolProfileRegion">- | کد: -</p>
                 </div>
             </div>
 
             <div class="school-profile-grid">
                 <div class="modern-card">
                     <h3>وضعیت درخت مدرسه</h3>
-                    <div class="tree-container-hero" style="transform: scale(0.8); height: 280px;">
+                    <div class="tree-container-hero" style="transform: scale(0.8); height: 280px; position: relative;">
+                        <div id="treeMultiplierBadge" class="tree-multiplier-badge" style="display: none;"></div>
+                        
                         <div class="live-tree-trunk"></div>
                         <div class="live-tree-layer layer-1" id="sl-1"></div>
                         <div class="live-tree-layer layer-2" id="sl-2"></div>
@@ -459,7 +514,7 @@
                         <div class="live-tree-layer layer-4" id="sl-4"></div>
                         <div class="live-tree-layer layer-5" id="sl-5"></div>
                     </div>
-                    <p style="color: var(--primary-color); font-weight: bold; margin-top: 1rem;">شما در حال نجات یک درخت هستید!</p>
+                    <p style="color: var(--primary-color); font-weight: bold; margin-top: 1rem;" id="treeStatusText">شما در حال نجات یک درخت هستید!</p>
                 </div>
 
                 <div class="modern-card">
@@ -470,7 +525,7 @@
                         </svg>
                         <div class="progress-text">
                             <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-color);" id="schoolPercentText">0%</div>
-                            <div style="color: #888; font-size: 0.9rem;">پیشرفت</div>
+                            <div style="color: #888; font-size: 0.9rem;">پیشرفت (درخت فعلی)</div>
                         </div>
                     </div>
                     
@@ -486,7 +541,7 @@
                     </div>
                     
                     <div style="margin-top: 1.5rem; width: 100%; padding: 1rem; background: #fff3cd; border-radius: 10px; font-size: 0.9rem; color: #856404;">
-                        💡 <strong>نکته:</strong> هر ۲۵۰ کیلوگرم کاغذ معادل نجات یک درخت است.
+                        💡 <strong>نکته:</strong> هر ۵۰۰ کیلوگرم کاغذ معادل نجات یک درخت است.
                     </div>
                 </div>
             </div>
@@ -498,8 +553,8 @@
             <div class="page-header" style="background: linear-gradient(135deg, #1b5e20, #004d40);">
                 <div style="padding: 0 2rem; position: relative; z-index: 2;">
                     <span style="background: white; color: #004d40; padding: 5px 12px; border-radius: 15px; font-size: 0.8rem; font-weight: bold;">اداره پیشتاز</span>
-                    <h1 id="officeProfileName" style="margin-top: 10px;">اداره آموزش و پرورش ناحیه ۲</h1>
-                    <p id="officeProfileStats">مدارس فعال: 52 | کل کاغذ: 7200 kg</p>
+                    <h1 id="officeProfileName" style="margin-top: 10px;">-</h1>
+                    <p id="officeProfileStats">مدارس فعال: 0 | کل کاغذ: 0 kg</p>
                 </div>
             </div>
 
@@ -549,18 +604,15 @@
             <div id="adminPanel" style="display: none;">
                 <h2 style="text-align: center; margin-bottom: 2rem;">پنل مدیریت داده‌ها</h2>
                 <div class="upload-grid">
-                    <div class="upload-box" onclick="document.getElementById('schoolsFile').click()">
-                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏫</div>
-                        <h3>بارگذاری مدارس</h3>
-                        <p style="color: #888; font-size: 0.9rem;">فایل اکسل اطلاعات مدارس</p>
-                        <input type="file" id="schoolsFile" hidden accept=".xlsx, .xls">
+                    <div class="upload-box" onclick="document.getElementById('mainFile').click()">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">📊</div>
+                        <h3>بارگذاری فایل کلی (اکسل)</h3>
+                        <p style="color: #888; font-size: 0.9rem;">شامل کد، نام مدرسه، وزن و رتبه (تفکیک خودکار)</p>
+                        <input type="file" id="mainFile" hidden accept=".xlsx, .xls">
                     </div>
-                    <div class="upload-box" onclick="document.getElementById('officesFile').click()">
-                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏢</div>
-                        <h3>بارگذاری ادارات</h3>
-                        <p style="color: #888; font-size: 0.9rem;">فایل اکسل اطلاعات ادارات</p>
-                        <input type="file" id="officesFile" hidden accept=".xlsx, .xls">
-                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                     <button class="nav-btn" onclick="exportData()" style="background: #1b5e20;">📥 خروجی اکسل از سایت</button>
                 </div>
             </div>
         </div>
@@ -581,17 +633,48 @@
     </footer>
 
     <script>
+        // --- دیکشنری نام مناطق (طبق فایل اکسل و درخواست شما از ارزوئیه تا نوق) ---
+        // کدها باید دو رقمی باشند (01, 02, ...)
+        const regionNames = {
+            "01": "ارزوئیه",
+            "02": "انار",
+            "03": "بافت",
+            "04": "بردسیر",
+            "05": "بم",
+            "06": "جیرفت",
+            "07": "رابر",
+            "08": "راور",
+            "09": "رفسنجان",
+            "10": "رودبار جنوب",
+            "11": "ریگان",
+            "12": "زرند",
+            "13": "سیرجان",
+            "14": "شهربابک",
+            "15": "عنبرآباد",
+            "16": "فهرج",
+            "17": "فاریاب",
+            "18": "قلعه گنج",
+            "19": "کهنوج",
+            "20": "کوهبنان",
+            "21": "منوجان",
+            "22": "نرماشیر",
+            "23": "ناحیه ۱ کرمان",
+            "24": "ناحیه ۲ کرمان",
+            "25": "چترود",
+            "26": "راین",
+            "27": "شهداد",
+            "28": "گلباف",
+            "29": "ماهیان",
+            "30": "نوق",
+            "31": "کشکوئیه",
+            "32": "سیرچ",
+            "33": "خیرآباد" // اگر نام منطقه 33 متفاوت است، اینجا را ویرایش کنید
+        };
+
         // --- داده‌های پیش‌فرض ---
-        let data = {
-            schools: [
-                { 'نام_مدرسه': 'دبیرستان امام رضا', 'منطقه': 'ناحیه ۱', 'میزان_جمع‌آوری_کیلوگرم': 280, 'کد': 'KER-01-02', 'isTop': true },
-                { 'نام_مدرسه': 'دبیرستان شهدای کرمان', 'منطقه': 'ناحیه ۱', 'میزان_جمع‌آوری_کیلوگرم': 125, 'کد': 'KER-01-01' },
-                { 'نام_مدرسه': 'هنرستان فنی قدس', 'منطقه': 'ناحیه ۲', 'میزان_جمع‌آوری_کیلوگرم': 200, 'کد': 'KER-02-01' }
-            ],
-            offices: [
-                { 'نام_اداره': 'اداره ناحیه ۲', 'تعداد_مدارس': 52, 'جمع_کل_جمع‌آوری_کیلوگرم': 7200, 'isTop': true },
-                { 'نام_اداره': 'اداره ناحیه ۱', 'تعداد_مدارس': 48, 'جمع_کل_جمع‌آوری_کیلوگرم': 5600 }
-            ]
+        let appData = {
+            schools: [],
+            offices: []
         };
 
         // --- مدیریت ناوبری ---
@@ -624,7 +707,7 @@
             event.target.classList.add('active');
         }
 
-        // --- اسلایدر جوایز (JS از فایل ارسالی) ---
+        // --- اسلایدر جوایز ---
         let currentSlide = 0;
         const totalSlides = 4;
         let slideInterval;
@@ -674,120 +757,236 @@
             });
         }
 
-        // --- مدیریت اکسل ---
+        // --- مدیریت اکسل و پردازش داده‌ها ---
         document.addEventListener('DOMContentLoaded', () => {
             setupExcelListeners();
-            refreshAllData(); 
             initSlider();
+            // بارگذاری داده اولیه (نمونه)
+            processInitialData();
         });
 
         function setupExcelListeners() {
-            document.getElementById('schoolsFile').addEventListener('change', (e) => processFile(e.target.files[0], 'schools'));
-            document.getElementById('officesFile').addEventListener('change', (e) => processFile(e.target.files[0], 'offices'));
+            document.getElementById('mainFile').addEventListener('change', (e) => processMainFile(e.target.files[0]));
         }
 
-        function processFile(file, type) {
+        // تابع کمکی برای پردازش داده اولیه (تست)
+        function processInitialData() {
+            // داده‌های تستی برای شروع
+            appData.schools = [
+                 { code: 'KER-23-01', name: 'دبیرستان نمونه امام رضا', weight: 280, rank: 1, regionCode: '23' },
+                 { code: 'KER-23-02', name: 'مدرسه شهدا', weight: 120, rank: 2, regionCode: '23' },
+                 { code: 'KER-24-01', name: 'هنرستان قدس', weight: 600, rank: 1, regionCode: '24' } // مثال بالای 500 کیلو
+            ];
+            recalculateOffices();
+            refreshAllData();
+        }
+
+        function processMainFile(file) {
             if(!file) return;
             const reader = new FileReader();
             reader.onload = (e) => {
                 const workbook = XLSX.read(e.target.result, {type: 'array'});
                 const sheet = workbook.Sheets[workbook.SheetNames[0]];
-                const json = XLSX.utils.sheet_to_json(sheet);
+                const json = XLSX.utils.sheet_to_json(sheet, {header: 1}); // خواندن به صورت آرایه برای دسترسی به ستون‌ها
                 
-                if(json.length > 0) {
-                    data[type] = json;
-                    if(type === 'schools') {
-                        data.schools.forEach(s => s.isTop = false);
-                        data.schools.sort((a,b) => b['میزان_جمع‌آوری_کیلوگرم'] - a['میزان_جمع‌آوری_کیلوگرم']);
-                        if(data.schools.length > 0) data.schools[0].isTop = true;
+                // فرض بر این است که فایل اکسل 4 ستون دارد: کد | نام | وزن | رتبه
+                // ردیف اول هدر است
+                const schoolsData = [];
+                
+                // شروع از ردیف دوم (اینجا فرض بر این است که ردیف اول عنوان است)
+                for(let i = 1; i < json.length; i++) {
+                    const row = json[i];
+                    if(!row || row.length < 3) continue;
+
+                    const code = String(row[0]).trim(); // ستون اول: کد
+                    const name = row[1]; // ستون دوم: نام
+                    const weight = parseFloat(row[2]) || 0; // ستون سوم: وزن
+                    
+                    // تشخیص نوع کد (KER-XX-YY مدرسه است)
+                    // الگوی مدرسه: شروع با KER، دو رقم، خط تیره، دو رقم
+                    const schoolMatch = code.match(/^KER-(\d{2})-(\d{2})/i); // مثل KER-01-01
+                    const simpleSchoolMatch = code.match(/^KER-(\d{2})/i); // اگر فرمت ساده‌تر بود ولی باید مدرسه باشد
+
+                    if (schoolMatch) {
+                        schoolsData.push({
+                            code: code,
+                            name: name,
+                            weight: weight,
+                            regionCode: schoolMatch[1], // استخراج کد منطقه (مثلا 01)
+                            rawRank: row[3] // ستون چهارم اگر باشد
+                        });
                     }
-                    if(type === 'offices') {
-                        data.offices.forEach(o => o.isTop = false);
-                        data.offices.sort((a,b) => b['جمع_کل_جمع‌آوری_کیلوگرم'] - a['جمع_کل_جمع‌آوری_کیلوگرم']);
-                        if(data.offices.length > 0) data.offices[0].isTop = true;
-                    }
+                }
+                
+                if(schoolsData.length > 0) {
+                    appData.schools = schoolsData;
+                    
+                    // محاسبه رتبه‌بندی مدارس (مرتب‌سازی نزولی بر اساس وزن)
+                    appData.schools.sort((a,b) => b.weight - a.weight);
+                    appData.schools.forEach((s, index) => s.rank = index + 1);
+
+                    // تجمیع داده‌ها برای ادارات
+                    recalculateOffices();
                     
                     refreshAllData();
-                    alert(`اطلاعات ${type === 'schools' ? 'مدارس' : 'ادارات'} با موفقیت بروزرسانی شد.`);
+                    alert(`اطلاعات با موفقیت بارگذاری شد.\nتعداد مدارس: ${appData.schools.length}\nتعداد ادارات شناسایی شده: ${appData.offices.length}`);
+                } else {
+                    alert('هیچ داده معتبری یافت نشد. لطفا فرمت فایل (کد، نام، وزن) را بررسی کنید.');
                 }
             };
             reader.readAsArrayBuffer(file);
         }
 
-        function refreshAllData() {
-            const topSchool = data.schools.find(s => s.isTop) || data.schools[0];
-            const topOffice = data.offices.find(o => o.isTop) || data.offices[0];
+        function recalculateOffices() {
+            const officeMap = {};
 
-            if(topSchool) document.getElementById('topSchoolNameHero').innerText = topSchool['نام_مدرسه'].replace('دبیرستان ', '').replace('مدرسه ', '');
-            if(topOffice) document.getElementById('topOfficeNameHero').innerText = topOffice['نام_اداره'].replace('اداره آموزش و پرورش ', '');
+            // گروه‌بندی مدارس بر اساس کد منطقه
+            appData.schools.forEach(school => {
+                const rCode = school.regionCode;
+                if(!officeMap[rCode]) {
+                    officeMap[rCode] = {
+                        regionCode: rCode,
+                        name: regionNames[rCode] || `اداره کد ${rCode}`, // استفاده از دیکشنری نام‌ها
+                        totalWeight: 0,
+                        schoolCount: 0
+                    };
+                }
+                officeMap[rCode].totalWeight += school.weight;
+                officeMap[rCode].schoolCount += 1;
+            });
+
+            // تبدیل مپ به آرایه
+            appData.offices = Object.values(officeMap);
+            
+            // مرتب‌سازی ادارات بر اساس وزن کل
+            appData.offices.sort((a, b) => b.totalWeight - a.totalWeight);
+            
+            // تعیین رتبه ادارات
+            appData.offices.forEach((o, index) => o.rank = index + 1);
+        }
+
+        function refreshAllData() {
+            // بروزرسانی کارت‌های هیرو
+            const topSchool = appData.schools[0];
+            const topOffice = appData.offices[0];
+            
+            // مجموع کل درختان نجات یافته در کل استان
+            const totalWeightAll = appData.schools.reduce((sum, s) => sum + s.weight, 0);
+            const totalTrees = Math.floor(totalWeightAll / 500);
+
+            document.getElementById('totalActiveSchools').innerText = appData.schools.length.toLocaleString();
+            document.getElementById('totalTreesSaved').innerText = totalTrees.toLocaleString();
+
+            if(topSchool) document.getElementById('topSchoolNameHero').innerText = topSchool.name.replace('دبیرستان ', '').replace('مدرسه ', '');
+            if(topOffice) document.getElementById('topOfficeNameHero').innerText = topOffice.name.replace('اداره آموزش و پرورش ', '');
+            
             renderStatsTables();
+            updateSchoolProfile(); // آپدیت پروفایل با مدرسه اول به عنوان پیش‌فرض
+            updateOfficeProfile(); // آپدیت پروفایل با اداره اول
         }
 
         // --- رندر جداول آمار ---
         function renderStatsTables() {
             const schoolsBody = document.getElementById('schoolsTableBody');
             schoolsBody.innerHTML = '';
-            const sortedSchools = [...data.schools].sort((a,b) => b['میزان_جمع‌آوری_کیلوگرم'] - a['میزان_جمع‌آوری_کیلوگرم']);
             
-            sortedSchools.slice(0, 10).forEach((s, index) => {
+            // نمایش 50 مدرسه برتر
+            appData.schools.slice(0, 50).forEach((s, index) => {
                 const tr = document.createElement('tr');
+                const officeName = regionNames[s.regionCode] || s.regionCode;
+                const treeProgress = s.weight >= 500 ? '🌲 درخت کامل' : '🌱 در حال رشد';
+                
                 tr.innerHTML = `
                     <td><div class="rank-badge" style="${index === 0 ? 'background:#ffd700' : (index===1 ? 'background:#c0c0c0' : (index===2 ? 'background:#cd7f32' : 'background:#eee'))}">${index + 1}</div></td>
-                    <td>${s['نام_مدرسه']}</td>
-                    <td>${s['منطقه']}</td>
-                    <td style="font-weight:bold; color:var(--primary-dark)">${s['میزان_جمع‌آوری_کیلوگرم']}</td>
-                    <td>${s['میزان_جمع‌آوری_کیلوگرم'] >= 250 ? '🌲 درخت کامل' : '🌱 در حال رشد'}</td>
+                    <td>${s.name}</td>
+                    <td>${officeName}</td>
+                    <td style="font-weight:bold; color:var(--primary-dark)">${s.weight}</td>
+                    <td>${treeProgress}</td>
                 `;
                 schoolsBody.appendChild(tr);
             });
 
             const officesBody = document.getElementById('officesTableBody');
             officesBody.innerHTML = '';
-            const sortedOffices = [...data.offices].sort((a,b) => b['جمع_کل_جمع‌آوری_کیلوگرم'] - a['جمع_کل_جمع‌آوری_کیلوگرم']);
 
-            sortedOffices.forEach((o, index) => {
+            appData.offices.forEach((o, index) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><div class="rank-badge">${index + 1}</div></td>
-                    <td>${o['نام_اداره']}</td>
-                    <td>${o['تعداد_مدارس']}</td>
-                    <td style="font-weight:bold; color:var(--primary-dark)">${o['جمع_کل_جمع‌آوری_کیلوگرم']}</td>
-                    <td>${Math.floor(o['جمع_کل_جمع‌آوری_کیلوگرم'] / 250)} درخت</td>
+                    <td>${o.name}</td>
+                    <td>${o.schoolCount}</td>
+                    <td style="font-weight:bold; color:var(--primary-dark)">${o.totalWeight}</td>
+                    <td>${Math.floor(o.totalWeight / 500)} درخت کامل</td>
                 `;
                 officesBody.appendChild(tr);
             });
         }
 
-        // --- آپدیت پروفایل مدرسه ---
+        // --- آپدیت پروفایل مدرسه (منطق جدید درخت 500 کیلویی) ---
         function updateSchoolProfile() {
-            const school = data.schools.find(s => s.isTop) || data.schools[0];
+            // فعلا مدرسه رتبه 1 را نشان میدهد (در نسخه واقعی باید لاگین باشد)
+            const school = appData.schools[0];
             if(!school) return;
 
-            document.getElementById('schoolProfileName').innerText = school['نام_مدرسه'];
-            document.getElementById('schoolProfileRegion').innerText = `${school['منطقه']} | کد: ${school['کد'] || '-'}`;
+            const officeName = regionNames[school.regionCode] || school.regionCode;
+            document.getElementById('schoolProfileName').innerText = school.name;
+            document.getElementById('schoolProfileRegion').innerText = `${officeName} | کد: ${school.code || '-'}`;
             
-            const weight = school['میزان_جمع‌آوری_کیلوگرم'];
-            const target = 250;
-            const percent = Math.min(Math.round((weight / target) * 100), 100);
+            const weight = school.weight;
+            const target = 500; // هدف جدید درخت
             
+            // محاسبات درخت
+            const fullTrees = Math.floor(weight / target);
+            const remainder = weight % target;
+            const percent = Math.min(Math.round((remainder / target) * 100), 100);
+            
+            // نمایش ضریب درخت
+            const badge = document.getElementById('treeMultiplierBadge');
+            const statusText = document.getElementById('treeStatusText');
+            
+            if (fullTrees >= 1) {
+                // اگر بیشتر از 500 کیلو بود
+                // نمایش ضربدر درخت بعدی (مثلا اگر 700 تاست، یعنی درخت دوم در حال رشد است -> x2)
+                const currentTreeNumber = fullTrees + 1; 
+                badge.style.display = 'block';
+                badge.innerText = `x${currentTreeNumber}`; // درخت ضربدر N
+                statusText.innerText = `شگفت‌انگیز! شما ${fullTrees} درخت کامل کاشته‌اید و در حال تکمیل درخت ${currentTreeNumber} هستید.`;
+            } else {
+                badge.style.display = 'none';
+                statusText.innerText = 'شما در حال نجات یک درخت هستید!';
+            }
+
+            // انیمیشن دایره
             const circle = document.getElementById('schoolProgressCircle');
             const circumference = 2 * Math.PI * 90;
             const offset = circumference - (percent / 100) * circumference;
             
             setTimeout(() => {
                 circle.style.strokeDashoffset = offset;
-                document.getElementById('schoolPercentText').innerText = percent + '%';
+                // اگر درخت کامل شده، درصد پر بودن درخت *فعلی* را نشان بده (remainder)
+                // اگر دقیقا 500 یا 1000 باشد، درصد 0 (شروع بعدی) یا 100 (اتمام قبلی)؟ معمولا 0 برای بعدی.
+                // اگر 500 کیلو باشد: fullTrees=1, remainder=0, percent=0.
+                // اگر 700 کیلو: fullTrees=1, remainder=200, percent=40.
+                document.getElementById('schoolPercentText').innerText = (fullTrees > 0 && percent === 0) ? "100%" : percent + '%';
+                // اصلاح: اگر دقیقا ضریب 500 باشد، بگوییم درخت کامل شد.
+                if (weight > 0 && weight % 500 === 0) {
+                     badge.innerText = `x${fullTrees}`; // همان قبلی کامل شده
+                     document.getElementById('schoolPercentText').innerText = "100%";
+                     circle.style.strokeDashoffset = 0; // دایره پر
+                }
             }, 500);
 
             document.getElementById('schoolWeightText').innerText = weight + ' kg';
-            document.getElementById('schoolRankText').innerText = '۱';
+            document.getElementById('schoolRankText').innerText = school.rank;
 
+            // انیمیشن لایه‌های درخت
             for(let i=1; i<=5; i++) {
                 const layer = document.getElementById(`sl-${i}`);
                 layer.style.opacity = '0.3';
                 layer.style.transform = 'translateX(-50%) scale(0.8)';
                 
-                if(percent >= i*20) {
+                // لایه‌ها بر اساس درصد پر می‌شوند (هر 20 درصد یک لایه)
+                if(percent >= i*20 || (weight > 0 && weight % 500 === 0)) {
                     setTimeout(() => {
                         layer.style.opacity = '1';
                         layer.style.transform = 'translateX(-50%) scale(1)';
@@ -799,15 +998,17 @@
 
         // --- آپدیت پروفایل اداره ---
         function updateOfficeProfile() {
-            const office = data.offices.find(o => o.isTop) || data.offices[0];
+            const office = appData.offices[0];
             if(!office) return;
 
-            document.getElementById('officeProfileName').innerText = office['نام_اداره'];
-            document.getElementById('officeProfileStats').innerText = `مدارس: ${office['تعداد_مدارس']} | جمع کل: ${office['جمع_کل_جمع‌آوری_کیلوگرم']} kg`;
+            document.getElementById('officeProfileName').innerText = office.name;
+            document.getElementById('officeProfileStats').innerText = `مدارس فعال: ${office.schoolCount} | جمع کل: ${office.totalWeight} kg`;
             
-            const treeCount = Math.floor(office['جمع_کل_جمع‌آوری_کیلوگرم'] / 250);
+            const treeCount = Math.floor(office.totalWeight / 500);
             document.getElementById('officeTreeCount').innerText = treeCount;
-            document.getElementById('officeAvgWeight').innerText = Math.round(office['جمع_کل_جمع‌آوری_کیلوگرم'] / office['تعداد_مدارس']) + ' kg';
+            const avg = office.schoolCount > 0 ? Math.round(office.totalWeight / office.schoolCount) : 0;
+            document.getElementById('officeAvgWeight').innerText = avg + ' kg';
+            document.getElementById('officeRank').innerText = office.rank;
 
             const grid = document.getElementById('officeForestGrid');
             grid.innerHTML = '';
@@ -831,6 +1032,31 @@
             }
         }
 
+        // --- خروجی اکسل ---
+        function exportData() {
+            if (appData.schools.length === 0) {
+                alert("داده‌ای برای خروجی گرفتن وجود ندارد.");
+                return;
+            }
+
+            // آماده‌سازی داده‌ها برای اکسل
+            const exportDataArray = appData.schools.map(s => ({
+                "کد": s.code,
+                "نام مدرسه": s.name,
+                "وزن (کیلوگرم)": s.weight,
+                "رتبه کل": s.rank,
+                "نام اداره": regionNames[s.regionCode] || s.regionCode
+            }));
+
+            const ws = XLSX.utils.json_to_sheet(exportDataArray);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Schools Data");
+
+            // دانلود فایل
+            XLSX.writeFile(wb, "Kerman_Green_Tree_Data.xlsx");
+        }
+
+
         // --- منطق امنیت OTP و EmailJS ---
         let generatedOTP = null;
         const ALLOWED_EMAIL = 'afsharmanesh.ehsan@gmail.com';
@@ -842,26 +1068,20 @@
                 return;
             }
 
-            // تولید کد 5 رقمی تصادفی
             generatedOTP = Math.floor(10000 + Math.random() * 90000);
             
-            // تنظیمات دکمه برای جلوگیری از کلیک مجدد
             const sendBtn = document.querySelector('#emailStep .nav-btn');
             const originalText = sendBtn.innerText;
             sendBtn.innerText = 'در حال ارسال...';
             sendBtn.disabled = true;
 
-            // پارامترهای قالب ایمیل
-            // فرض بر این است که قالب شما متغیرهای 'otp_code' و 'to_email' یا موارد مشابه را می‌پذیرد.
-            // این آبجکت اکثر نام‌گذاری‌های استاندارد را پوشش می‌دهد.
             const templateParams = {
                 to_email: email,
                 otp_code: generatedOTP,
-                message: generatedOTP, // جهت اطمینان
+                message: generatedOTP,
                 to_name: "مدیر محترم"
             };
 
-            // ارسال ایمیل با استفاده از EmailJS
             emailjs.send('service_0cbwqya', 'template_enjznsm', templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
@@ -871,7 +1091,7 @@
                     document.getElementById('otpStep').style.display = 'block';
                 }, function(error) {
                     console.log('FAILED...', error);
-                    alert('خطا در ارسال ایمیل. لطفا اتصال اینترنت را بررسی کنید یا تنظیمات EmailJS را چک کنید.');
+                    alert('خطا در ارسال ایمیل.');
                 })
                 .finally(() => {
                     sendBtn.innerText = originalText;
