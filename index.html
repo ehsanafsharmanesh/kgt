@@ -10,7 +10,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
        (function(){
-          // حتماً این بخش را با کلید عمومی EmailJS خود جایگزین کنید
           emailjs.init("VZYbSfsVjY-B4rsyE");
        })();
     </script>
@@ -38,7 +37,6 @@
 
         body {
             font-family: 'Vazirmatn', sans-serif;
-            /* اجبار رنگ روشن برای حل مشکل مرورگرهای موبایل */
             background-color: var(--background) !important;
             color: var(--text-dark) !important;
             overflow-x: hidden;
@@ -128,7 +126,6 @@
             border-radius: 16px;
         }
         
-        /* کاغذ رنگی */
         .confetti {
             position: absolute; width: 10px; height: 10px; background-color: #f00;
             animation: confetti-fall 3s linear infinite;
@@ -138,7 +135,6 @@
             100% { transform: translateY(300px) rotate(720deg); opacity: 0; }
         }
 
-        /* پرنده */
         .bird-fly {
             position: absolute; top: 20%; right: -50px;
             width: 40px; height: 40px;
@@ -150,7 +146,6 @@
             100% { right: 110%; transform: translateY(0) scaleX(1); }
         }
 
-        /* بچه‌های شاد */
         .dancing-kid {
             position: absolute; bottom: 10px; 
             width: 50px; height: 60px;
@@ -164,7 +159,6 @@
             100% { transform: translateY(-10px) rotate(5deg); }
         }
 
-        /* --- نشانگر ضریب درخت --- */
         .tree-multiplier-badge {
             position: absolute; top: 10px; right: 10px;
             background: var(--secondary-color); color: var(--text-dark);
@@ -179,19 +173,22 @@
             100% { transform: scale(1); }
         }
 
-        /* --- بخش جوایز --- */
+        /* --- بخش جوایز (اصلاح تایتل) --- */
         .awards-section { padding: 0; position: relative; margin-top: -60px; margin-bottom: 4rem; z-index: 10; }
+        
+        /* اصلاح: وسط چین کردن تایتل جوایز */
         .section-header-awards {
-            text-align: center; margin-bottom: 2rem;
-            display: table; margin: 0 auto;
+            text-align: center;
+            margin: 0 auto 2rem auto; /* وسط چین افقی */
+            width: fit-content; /* اندازه عرض متناسب با محتوا */
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(5px);
-            display: inline-block; padding: 1rem 2rem;
-            border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: static; transform: none;
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         .section-header-awards h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-dark); }
-        .section-header-awards p { opacity: 0.9; color: var(--primary-dark); font-weight: 500; }
+        .section-header-awards p { opacity: 0.9; color: var(--primary-dark); font-weight: 500; margin: 0; }
 
         .awards-slider {
             max-width: 1000px; margin: 0 auto; position: relative; border-radius: 24px;
@@ -249,7 +246,6 @@
         .progress-circle-container { position: relative; width: 200px; height: 200px; margin: 0 auto; }
         .progress-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
         .progress-circle-bg { fill: none; stroke: #e0e0e0; stroke-width: 10; }
-        /* راهکار ۳: انیمیشن فیتیله‌ای و تپش */
         .progress-circle-fg { 
             fill: none; stroke: var(--primary-color); stroke-width: 10; 
             stroke-dasharray: 565; stroke-dashoffset: 565; 
@@ -607,39 +603,13 @@
 
         // --- دیکشنری نام مناطق ---
         const regionNames = {
-            "01": "ارزوئیه",
-            "02": "انار",
-            "03": "بافت",
-            "04": "بردسیر",
-            "05": "بم",
-            "06": "جازموریان",
-            "07": "جیرفت",
-            "08": "چترود",
-            "09": "رابر",
-            "10": "راور",
-            "11": "راین",
-            "12": "رفسنجان",
-            "13": "رودبار جنوب",
-            "14": "ریگان",
-            "15": "زرند",
-            "16": "سیرجان",
-            "17": "شهداد",
-            "18": "شهربابک",
-            "19": "عشایری کرمان",
-            "20": "عنبرآباد",
-            "21": "فاریاب",
-            "22": "فهرج",
-            "23": "قلع گنج",
-            "24": "ناحیه 1 کرمان",
-            "25": "ناحیه 2 کرمان",
-            "26": "کشکوئیه",
-            "27": "کوهبنان",
-            "28": "کهنوج",
-            "29": "گلباف",
-            "30": "ماهان",
-            "31": "منوجان",
-            "32": "نرماشیر",
-            "33": "نوق"
+            "01": "ارزوئیه", "02": "انار", "03": "بافت", "04": "بردسیر", "05": "بم",
+            "06": "جازموریان", "07": "جیرفت", "08": "چترود", "09": "رابر", "10": "راور",
+            "11": "راین", "12": "رفسنجان", "13": "رودبار جنوب", "14": "ریگان", "15": "زرند",
+            "16": "سیرجان", "17": "شهداد", "18": "شهربابک", "19": "عشایری کرمان", "20": "عنبرآباد",
+            "21": "فاریاب", "22": "فهرج", "23": "قلع گنج", "24": "ناحیه 1 کرمان", "25": "ناحیه 2 کرمان",
+            "26": "کشکوئیه", "27": "کوهبنان", "28": "کهنوج", "29": "گلباف", "30": "ماهان",
+            "31": "منوجان", "32": "نرماشیر", "33": "نوق"
         };
 
         // --- داده‌های برنامه ---
@@ -652,12 +622,26 @@
         document.addEventListener('DOMContentLoaded', () => {
             setupExcelListeners();
             initSlider();
+            animateHomeTree(); // شروع انیمیشن درخت صفحه اصلی
             loadDataFromCloud(); // تلاش برای خواندن از فضای ابری
         });
 
+        // --- تابع جدید انیمیشن درخت صفحه اصلی (بدون وابستگی به آمار) ---
+        function animateHomeTree() {
+            const layers = [1, 2, 3, 4, 5];
+            layers.forEach((i, index) => {
+                setTimeout(() => {
+                    const layer = document.getElementById(`hl-${i}`);
+                    if(layer) {
+                        layer.classList.remove('tree-layer-hidden');
+                        layer.classList.add('tree-layer-visible');
+                    }
+                }, index * 800); // تاخیر انیمیشن برای رشد
+            });
+        }
+
         // --- توابع فضای ابری ---
         async function loadDataFromCloud() {
-            // اگر کلیدها وارد نشده باشند، از دیتای پیش‌فرض استفاده کن
             if(JSONBIN_API_KEY.includes("XXXX")) {
                 console.log("Using Local Demo Data (No Cloud Configured)");
                 processInitialData(); // دیتای تستی
@@ -689,7 +673,7 @@
                 return;
             }
 
-            const loadingBtn = document.querySelector('#adminPanel button'); // دکمه خروجی را موقتا تغییر نمیدهم، فقط لاگ میکنم
+            const loadingBtn = document.querySelector('#adminPanel button'); 
             
             try {
                 const response = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`, {
@@ -738,12 +722,8 @@
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             
-            event.target.closest('.tab-btn').classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(el => {
-                if(el !== event.target.closest('.tab-btn')) {
-                    el.classList.remove('active');
-                }
-            });
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
         }
 
         // --- اسلایدر ---
@@ -784,10 +764,10 @@
         }
 
         function processInitialData() {
-            // داده‌های تستی اصلاح شده برای نمایش کامل انیمیشن درخت (2500 کیلوگرم = 5 درخت)
+            // داده‌های تستی
             appData.schools = [
-                 { code: 'KER-23-01', name: 'دبیرستان نمونه امام رضا', weight: 1000, rank: 1, regionCode: '23' }, 
-                 { code: 'KER-23-02', name: 'مدرسه شهدا', weight: 500, rank: 2, regionCode: '23' },
+                 { code: 'KER-23-01', name: 'دبیرستان نمونه امام رضا', weight: 550, rank: 1, regionCode: '23' },
+                 { code: 'KER-23-02', name: 'مدرسه شهدا', weight: 120, rank: 2, regionCode: '23' },
                  { code: 'KER-05-01', name: 'مدرسه شهیدان', weight: 1000, rank: 3, regionCode: '05' }
             ];
             recalculateOffices();
@@ -854,7 +834,6 @@
             const topSchool = appData.schools[0];
             const topOffice = appData.offices[0];
             const totalWeightAll = appData.schools.reduce((sum, s) => sum + s.weight, 0);
-            // محاسبه تعداد درختان کل استان
             const totalTrees = Math.floor(totalWeightAll / 500);
 
             document.getElementById('totalActiveSchools').innerText = appData.schools.length.toLocaleString();
@@ -864,39 +843,8 @@
             if(topOffice) document.getElementById('topOfficeNameHero').innerText = topOffice.name.replace('اداره آموزش و پرورش ', '');
             
             renderStatsTables();
-            // آپدیت پروفایل‌ها فعلا با آیتم اول
             if(appData.schools.length > 0) updateSchoolProfile(appData.schools[0]);
             if(appData.offices.length > 0) updateOfficeProfile();
-
-            // --- منطق اصلاح شده برای انیمیشن درخت صفحه اصلی (Home) ---
-            const homeTreeLayers = [
-                document.getElementById('hl-1'), 
-                document.getElementById('hl-2'), 
-                document.getElementById('hl-3'), 
-                document.getElementById('hl-4'), 
-                document.getElementById('hl-5')
-            ];
-
-            // نمایش تا 5 لایه بر اساس تعداد کل درختان نجات یافته
-            const layersToShow = Math.min(totalTrees, 5);
-            let delay = 0;
-
-            for(let i=0; i<5; i++) {
-                const layer = homeTreeLayers[i];
-                if (layer) {
-                    layer.classList.remove('tree-layer-visible', 'tree-layer-hidden'); // ریست
-                    if (i < layersToShow) {
-                        // فعال سازی با تاخیر
-                        setTimeout(() => {
-                            layer.classList.add('tree-layer-visible');
-                        }, delay);
-                        delay += 300; // تاخیر بین هر لایه
-                    } else {
-                        // غیر فعال سازی
-                        layer.classList.add('tree-layer-hidden');
-                    }
-                }
-            }
         }
 
         function renderStatsTables() {
@@ -918,7 +866,7 @@
             });
         }
 
-        // --- انیمیشن هوشمند درخت مدرسه (اصلاح شده) ---
+        // --- انیمیشن هوشمند درخت مدرسه ---
         function updateSchoolProfile(school = appData.schools[0]) {
             if(!school) return;
             const officeName = regionNames[school.regionCode] || school.regionCode;
@@ -933,40 +881,31 @@
             const remainder = weight % target;
             const percent = Math.min(Math.round((remainder / target) * 100), 100);
 
-            // 1. ریست کردن انیمیشن درخت (همه خاموش)
             for(let i=1; i<=5; i++) {
                 const layer = document.getElementById(`sl-${i}`);
                 layer.classList.remove('tree-layer-visible');
                 layer.classList.add('tree-layer-hidden');
             }
 
-            // 2. نمایش واقعی بر اساس وزن
             let layersToShow = 0;
-            // اگر یک درخت کامل شد، 5 لایه نمایش داده شود.
             if (weight >= target) layersToShow = 5; 
-            // در غیر این صورت، به ازای هر 20 درصد یک لایه (هر 100 کیلو = 1 لایه)
             else layersToShow = Math.floor(percent / 20); 
 
-            // اگر وزن > 0 ولی کمتر از 100 کیلو هست، حداقل یک لایه کوچک نشان بده
             if (weight > 0 && layersToShow === 0) layersToShow = 1;
 
             for(let i=1; i<=layersToShow; i++) {
                 setTimeout(() => {
                     document.getElementById(`sl-${i}`).classList.remove('tree-layer-hidden');
                     document.getElementById(`sl-${i}`).classList.add('tree-layer-visible');
-                }, i * 300); // انیمیشن رشد لایه‌ای
+                }, i * 300); 
             }
 
-
-            // 3. مدیریت جشن و نشانگر
             const badge = document.getElementById('treeMultiplierBadge');
             const statusText = document.getElementById('treeStatusText');
             const celebration = document.getElementById('celebrationOverlay');
             
-            // اضافه کردن کاغذ رنگی
             if (fullTrees >= 1) {
                  celebration.style.display = 'block';
-                 // ایجاد ذرات کاغذ رنگی اگر قبلا ساخته نشدند
                  if(celebration.querySelectorAll('.confetti').length === 0) {
                      for(let k=0; k<20; k++) {
                          let conf = document.createElement('div');
@@ -977,26 +916,21 @@
                          celebration.appendChild(conf);
                      }
                  }
-                 
                  badge.style.display = 'block';
                  badge.innerText = `x${fullTrees}`;
                  statusText.innerText = `تبریک! ${fullTrees} درخت کامل نجات داده‌اید!`;
-                 
             } else {
                 celebration.style.display = 'none';
                 badge.style.display = 'none';
                 statusText.innerText = 'شما در حال نجات یک درخت هستید!';
             }
 
-            // انیمیشن دایره
             const circle = document.getElementById('schoolProgressCircle');
             const circumference = 2 * Math.PI * 90;
-            // اگر درخت کامل شد (500kg) و باقی مانده صفر است، دایره باید کامل باشد (offset 0)
             const offset = circumference - (percent / 100) * circumference;
             
             setTimeout(() => {
                 circle.style.strokeDashoffset = (fullTrees >= 1 && remainder === 0) ? 0 : offset;
-                // اگر درخت کامل بود، درصد را 100% نمایش بده، حتی اگر باقی مانده صفر باشد
                 document.getElementById('schoolPercentText').innerText = (fullTrees >= 1 && remainder === 0) ? "100%" : percent + '%';
             }, 500);
         }
@@ -1046,7 +980,6 @@
             const originalText = sendBtn.innerText;
             sendBtn.innerText = 'در حال ارسال...'; sendBtn.disabled = true;
             const templateParams = { to_email: email, otp_code: generatedOTP, message: generatedOTP, to_name: "مدیر محترم" };
-            // SERVICE ID و TEMPLATE ID خود را حتما جایگزین کنید (در اینجا کدهای تست قرار دارند)
             emailjs.send('service_0cbwqya', 'template_enjznsm', templateParams)
                 .then(function(r) { alert(`کد تایید ارسال شد.`); document.getElementById('emailStep').style.display = 'none'; document.getElementById('otpStep').style.display = 'block'; }, function(e) { alert('خطا در ارسال ایمیل.'); })
                 .finally(() => { sendBtn.innerText = originalText; sendBtn.disabled = false; });
@@ -1058,4 +991,3 @@
     </script>
 </body>
 </html>
-
