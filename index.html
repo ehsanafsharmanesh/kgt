@@ -153,7 +153,9 @@
             padding: 1rem 2rem;
             border-radius: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            position: relative; left: 50%; transform: translateX(-50%);
+            /* حذف خصوصیات position/transform که در دسکتاپ تداخل ایجاد می‌کردند */
+           position: static;
+           transform: none;
         }
         .section-header-awards h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-dark); }
         .section-header-awards p { opacity: 0.9; color: var(--primary-dark); font-weight: 500; }
@@ -1121,4 +1123,5 @@
     </script>
 </body>
 </html>
+
 
