@@ -119,13 +119,12 @@
 
         @keyframes growTrunk { to { height: 80px; } }
 
-        /* --- بخش جشن و تبریک (Celebration) --- */
+        /* --- بخش جشن و تبریک --- */
         .celebration-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 20; display: none; overflow: hidden;
             border-radius: 16px;
         }
-        
         .confetti {
             position: absolute; width: 10px; height: 10px; background-color: #f00;
             animation: confetti-fall 3s linear infinite;
@@ -134,7 +133,6 @@
             0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
             100% { transform: translateY(300px) rotate(720deg); opacity: 0; }
         }
-
         .bird-fly {
             position: absolute; top: 20%; right: -50px;
             width: 40px; height: 40px;
@@ -145,7 +143,6 @@
             50% { transform: translateY(-20px) scaleX(1); }
             100% { right: 110%; transform: translateY(0) scaleX(1); }
         }
-
         .dancing-kid {
             position: absolute; bottom: 10px; 
             width: 50px; height: 60px;
@@ -153,12 +150,10 @@
         }
         .kid-left { left: 20px; animation-delay: 0s; }
         .kid-right { right: 20px; animation-delay: 0.5s; }
-
         @keyframes dance-jump {
             0% { transform: translateY(0) rotate(-5deg); }
             100% { transform: translateY(-10px) rotate(5deg); }
         }
-
         .tree-multiplier-badge {
             position: absolute; top: 10px; right: 10px;
             background: var(--secondary-color); color: var(--text-dark);
@@ -173,19 +168,12 @@
             100% { transform: scale(1); }
         }
 
-        /* --- بخش جوایز (اصلاح تایتل) --- */
+        /* --- بخش جوایز --- */
         .awards-section { padding: 0; position: relative; margin-top: -60px; margin-bottom: 4rem; z-index: 10; }
-        
-        /* اصلاح: وسط چین کردن تایتل جوایز */
         .section-header-awards {
-            text-align: center;
-            margin: 0 auto 2rem auto; /* وسط چین افقی */
-            width: fit-content; /* اندازه عرض متناسب با محتوا */
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            padding: 1rem 2rem;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: center; margin: 0 auto 2rem auto; width: fit-content;
+            background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(5px);
+            padding: 1rem 2rem; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
         .section-header-awards h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary-dark); }
         .section-header-awards p { opacity: 0.9; color: var(--primary-dark); font-weight: 500; margin: 0; }
@@ -224,11 +212,26 @@
         /* --- استایل مشترک صفحات داخلی --- */
         .page-header { background: linear-gradient(135deg, var(--primary-dark), var(--primary-color)); color: white; padding: 3rem 0; border-radius: 20px; margin-bottom: 2rem; position: relative; overflow: hidden; box-shadow: var(--shadow-soft); }
         .page-header::after { content: ''; position: absolute; right: 0; bottom: 0; width: 300px; height: 300px; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='rgba(255, 255, 255, 0.1)' d='M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.5,70.9,32.2C59.6,42.9,48.3,51.4,36.4,58.5C24.5,65.6,12,71.3,-1.2,73.4C-14.4,75.5,-29.8,74,-43.3,67.6C-56.8,61.2,-68.4,49.9,-76.3,36.4C-84.2,22.9,-88.4,7.2,-86.3,-7.5C-84.2,-22.2,-75.8,-35.9,-65.1,-46.8C-54.4,-57.7,-41.4,-65.8,-28.3,-73.6C-15.2,-81.4,-2,-88.9,12.2,-89.8C26.4,-90.7,40.8,-85,44.7,-76.4Z' transform='translate(100 100)' /%3E%3C/svg%3E") no-repeat bottom right; background-size: contain; }
+        
         .stats-cards-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+        
+        /* استایل آیکون‌های مدال در پروفایل اداره (جذابیت بصری) */
+        @keyframes medalSwing {
+            0% { transform: rotate(10deg); }
+            100% { transform: rotate(-10deg); }
+        }
+        
         .modern-card { background: white !important; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; display: flex; flex-direction: column; align-items: center; position: relative; overflow: hidden; }
         .modern-card h3 { font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem; }
         .modern-card .value { font-size: 1.8rem; font-weight: bold; color: var(--primary-dark); }
-        .modern-card .icon { font-size: 2rem; margin-bottom: 0.5rem; background: #e8f5e9; padding: 10px; border-radius: 50%; }
+        
+        .modern-card .icon { 
+            font-size: 2rem; margin-bottom: 0.5rem; background: #e8f5e9; padding: 10px; border-radius: 50%; 
+            /* انیمیشن آونگی برای مدال */
+            transform-origin: top center;
+            animation: medalSwing 2s ease-in-out infinite alternate;
+        }
+        
         .modern-table-container { background: white !important; border-radius: 16px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); overflow-x: auto; }
         .modern-table { width: 100%; border-collapse: collapse; min-width: 600px; }
         .modern-table th { text-align: right; padding: 1rem; color: var(--text-light); font-weight: 600; border-bottom: 2px solid #f0f0f0; }
@@ -259,8 +262,23 @@
             100% { filter: drop-shadow(0 0 5px var(--primary-color)); stroke: #2e7d32; }
         }
         .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+        
+        /* انیمیشن جنگل اداره (باد) */
+        @keyframes windSway {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
         .forest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 10px; background: #e8f5e9; padding: 2rem; border-radius: 20px; min-height: 200px; max-height: 400px; overflow-y: auto; }
-        .forest-tree-item { font-size: 2.5rem; text-align: center; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: scale(0); }
+        .forest-tree-item { 
+            font-size: 2.5rem; text-align: center; 
+            transform-origin: bottom center; /* چرخش از پایین درخت */
+            /* انیمیشن ظهور + انیمیشن وزش باد مداوم */
+            animation: popIn 0.5s ease-out forwards, windSway 3s ease-in-out infinite; 
+            opacity: 0; transform: scale(0); 
+        }
         @keyframes popIn { to { opacity: 1; transform: scale(1); } }
 
         /* --- فرم دسترسی --- */
@@ -361,7 +379,7 @@
             <div class="container">
                 <div class="section-header-awards">
                     <h2>جشنواره جوایز بزرگ سبز</h2>
-                    <p>تقدیر از تلاشگران حفظ محیط زیست با جوایز نفیس</p>
+                    <p>تقدیر از تلاشگران حافظ محیط زیست با جوایز نفیس</p>
                 </div>
                 
                 <div class="awards-slider" id="awardsSlider">
@@ -373,7 +391,7 @@
                                 <div class="award-icon-box">🖥️</div>
                                 <h3 class="award-title">تجهیز هوشمند مدارس</h3>
                                 <p class="award-description">تخته هوشمند، ویدئو پروژکتور و لپ‌تاپ برای مدارس برتر در جمع‌آوری کاغذ</p>
-                                <div class="award-prize-tag">ویژه ۳ مدرسه اول استان</div>
+                                <div class="award-prize-tag">ویژه مدرسه اول استان</div>
                             </div>
                         </div>
                         <div class="award-slide">
@@ -401,9 +419,9 @@
                             <div class="slide-overlay"></div>
                             <div class="award-content">
                                 <div class="award-icon-box">🏆</div>
-                                <h3 class="award-title">تندیس زرین محیط زیست</h3>
+                                <h3 class="award-title">تندیس حافظ محیط زیست</h3>
                                 <p class="award-description">نشان رسمی و تقدیرنامه با امضای مدیرکل محترم + اعتبار نقدی</p>
-                                <div class="award-prize-tag">معتبرترین نشان استانی</div>
+                                <div class="award-prize-tag"> نشان برتر استانی</div>
                             </div>
                         </div>
                     </div>
@@ -866,7 +884,7 @@
             });
         }
 
-        // --- انیمیشن هوشمند درخت مدرسه ---
+        // --- انیمیشن هوشمند درخت مدرسه (اصلاح شده - شمارش از صفر) ---
         function updateSchoolProfile(school = appData.schools[0]) {
             if(!school) return;
             const officeName = regionNames[school.regionCode] || school.regionCode;
@@ -881,6 +899,7 @@
             const remainder = weight % target;
             const percent = Math.min(Math.round((remainder / target) * 100), 100);
 
+            // 1. نمایش واقعی درخت بر اساس وزن
             for(let i=1; i<=5; i++) {
                 const layer = document.getElementById(`sl-${i}`);
                 layer.classList.remove('tree-layer-visible');
@@ -925,14 +944,41 @@
                 statusText.innerText = 'شما در حال نجات یک درخت هستید!';
             }
 
+            // --- انیمیشن دایره و شمارشگر عدد از صفر ---
             const circle = document.getElementById('schoolProgressCircle');
+            const percentageText = document.getElementById('schoolPercentText');
             const circumference = 2 * Math.PI * 90;
-            const offset = circumference - (percent / 100) * circumference;
             
+            // هدف نهایی برای نمایش
+            let targetPercent = (fullTrees >= 1 && remainder === 0) ? 100 : percent;
+            
+            // 1. ریست کردن به حالت اولیه (صفر)
+            circle.style.transition = 'none'; // حذف انیمیشن برای ریست آنی
+            circle.style.strokeDashoffset = circumference; // دایره خالی
+            percentageText.innerText = "0%";
+            
+            // 2. شروع انیمیشن به سمت هدف
             setTimeout(() => {
-                circle.style.strokeDashoffset = (fullTrees >= 1 && remainder === 0) ? 0 : offset;
-                document.getElementById('schoolPercentText').innerText = (fullTrees >= 1 && remainder === 0) ? "100%" : percent + '%';
-            }, 500);
+                // فعال کردن ترنزیشن برای حرکت نرم
+                circle.style.transition = 'stroke-dashoffset 1.5s ease-out';
+                const offset = circumference - (targetPercent / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+                
+                // شمارش عدد از 0 تا targetPercent
+                let currentCount = 0;
+                const duration = 1500; // مدت زمان انیمیشن (میلی ثانیه) - هماهنگ با CSS
+                const stepTime = Math.abs(Math.floor(duration / targetPercent));
+                
+                if (targetPercent > 0) {
+                    const timer = setInterval(() => {
+                        currentCount++;
+                        percentageText.innerText = currentCount + "%";
+                        if (currentCount >= targetPercent) {
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
+                }
+            }, 100); // تاخیر کوتاه برای اعمال ریست
         }
 
         function updateOfficeProfile() {
@@ -945,6 +991,8 @@
             const avg = office.schoolCount > 0 ? Math.round(office.totalWeight / office.schoolCount) : 0;
             document.getElementById('officeAvgWeight').innerText = avg + ' kg';
             document.getElementById('officeRank').innerText = office.rank;
+            
+            // انیمیشن جنگل (با تاخیر تصادفی برای وزش باد)
             const grid = document.getElementById('officeForestGrid');
             grid.innerHTML = '';
             const displayTrees = Math.min(treeCount, 50);
@@ -952,7 +1000,8 @@
                 const div = document.createElement('div');
                 div.className = 'forest-tree-item';
                 div.innerText = '🌲';
-                div.style.animationDelay = (i * 0.05) + 's';
+                // تاخیر تصادفی برای شروع حرکت باد تا همه با هم تکان نخورند
+                div.style.animationDelay = `${i * 0.05}s, ${Math.random() * 2}s`; 
                 grid.appendChild(div);
             }
             if(treeCount > 50) {
