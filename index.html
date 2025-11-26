@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
+    <meta name="supported-color-schemes" content="light">
     <title>طرح استانی درخت سبز کرمان</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -33,6 +34,15 @@
             --background: #f0fdf4;
             --white: #ffffff;
             --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            
+            /* راهکار قطعی برای مرورگر سامسونگ */
+            color-scheme: light;
+        }
+
+        /* اضافه کردن استایل به html برای جلوگیری از سیاه شدن در موبایل */
+        html {
+            background-color: #f0fdf4;
+            color-scheme: light;
         }
 
         body {
@@ -41,6 +51,8 @@
             color: var(--text-dark) !important;
             overflow-x: hidden;
             line-height: 1.6;
+            /* غیرفعال کردن اجباری دارک مود */
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- نوار ناوبری --- */
@@ -379,7 +391,7 @@
             <div class="container">
                 <div class="section-header-awards">
                     <h2>جشنواره جوایز بزرگ سبز</h2>
-                    <p>تقدیر از تلاشگران حافظ محیط زیست با جوایز نفیس</p>
+                    <p>تقدیر از تلاشگران حفظ محیط زیست با جوایز نفیس</p>
                 </div>
                 
                 <div class="awards-slider" id="awardsSlider">
@@ -391,7 +403,7 @@
                                 <div class="award-icon-box">🖥️</div>
                                 <h3 class="award-title">تجهیز هوشمند مدارس</h3>
                                 <p class="award-description">تخته هوشمند، ویدئو پروژکتور و لپ‌تاپ برای مدارس برتر در جمع‌آوری کاغذ</p>
-                                <div class="award-prize-tag">ویژه مدرسه اول استان</div>
+                                <div class="award-prize-tag">ویژه ۳ مدرسه اول استان</div>
                             </div>
                         </div>
                         <div class="award-slide">
@@ -419,9 +431,9 @@
                             <div class="slide-overlay"></div>
                             <div class="award-content">
                                 <div class="award-icon-box">🏆</div>
-                                <h3 class="award-title">تندیس حافظ محیط زیست</h3>
+                                <h3 class="award-title">تندیس زرین محیط زیست</h3>
                                 <p class="award-description">نشان رسمی و تقدیرنامه با امضای مدیرکل محترم + اعتبار نقدی</p>
-                                <div class="award-prize-tag"> نشان برتر استانی</div>
+                                <div class="award-prize-tag">معتبرترین نشان استانی</div>
                             </div>
                         </div>
                     </div>
