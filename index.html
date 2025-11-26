@@ -35,23 +35,33 @@
             --white: #ffffff;
             --shadow-soft: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
             
-            /* راهکار قطعی برای مرورگر سامسونگ */
+            /* متغیرهای سیستمی برای اجبار رنگ روشن */
             color-scheme: light;
+            forced-color-adjust: none;
         }
 
-        /* اضافه کردن استایل به html برای جلوگیری از سیاه شدن در موبایل */
+        /* --- اعمال دو روش قدرتمند برای جلوگیری از سیاه شدن --- */
         html {
-            background-color: #f0fdf4;
+            /* روش ۱: اولویت مطلق */
+            background-color: #f0fdf4 !important;
+            /* روش ۲: خنثی‌سازی الگوریتم وارونگی رنگ */
+            isolation: isolate;
             color-scheme: light;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
+            /* روش ۱: اولویت مطلق */
             background-color: var(--background) !important;
             color: var(--text-dark) !important;
+            
+            /* روش ۲: ایزوله کردن لایه رندرینگ از فیلترهای مرورگر */
+            isolation: isolate; 
+            forced-color-adjust: none;
+            
             overflow-x: hidden;
             line-height: 1.6;
-            /* غیرفعال کردن اجباری دارک مود */
             -webkit-font-smoothing: antialiased;
         }
 
@@ -334,7 +344,7 @@
                 <a class="nav-link" onclick="scrollToAwards()">جوایز</a>
                 <a class="nav-link" onclick="showSection('stats')">آمار استانی</a>
                 <a class="nav-link" onclick="showSection('school')">پروفایل مدرسه برتر</a>
-                <a class="nav-link" onclick="showSection('office')">پروفایل برتر</a>
+                <a class="nav-link" onclick="showSection('office')">پروفایل اداره برتر</a>
                 <button class="nav-btn" onclick="showSection('access')">مدیریت</button>
             </div>
         </div>
@@ -391,7 +401,7 @@
             <div class="container">
                 <div class="section-header-awards">
                     <h2>جشنواره جوایز بزرگ سبز</h2>
-                    <p>تقدیر از تلاشگران حافظ محیط زیست با جوایز نفیس</p>
+                    <p>تقدیر از تلاشگران حفظ محیط زیست با جوایز نفیس</p>
                 </div>
                 
                 <div class="awards-slider" id="awardsSlider">
@@ -1052,5 +1062,3 @@
     </script>
 </body>
 </html>
-
-
